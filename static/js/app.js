@@ -4,7 +4,10 @@ var data = "data/samples.json";
 // call it
 var promise = d3.json(data).then(data);
 console.log(promise);
-
+//set place holders
+var names = [];
+var metadata = [];
+var samples = [];
 // Create a horizontal bar chart with a dropdown menu to display top 10 OTUS found in individual
 // 1. Use sample_values as the values for the bar chart
 // 2. Use otu_ids as the labels for the bar chart
