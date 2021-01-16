@@ -1,9 +1,11 @@
 // Read in the samples.json file
 //name the .json location
-var data = "data/samples.json";
+var data = "/data/samples.json";
 // call it
-var promise = d3.json(data).then(data);
-console.log(promise);
+d3.json(data).then(function (data) {
+  console.log(data[0]);
+});
+
 //set place holders
 var names = [];
 var metadata = [];
