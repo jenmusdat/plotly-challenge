@@ -1,41 +1,93 @@
 // Read in the samples.json file
-//name the .json location
-var dataSource = "/data/samples.json";
 // call it
-d3.json("/data/samples.json").then(function (data) {
-  console.log(data[0]);
+d3.json("data/samples.json").then(function (data) {
+  console.log(data);
+  var dropDownIds = d3.select("#selDataset");
+  data.names.forEach((id) => {
+    dropDownIds.append("option").text(id).property("value", id);
+  });
+  showCharts(data.names[0]);
 });
+function optionChanged(id) {
+  showCharts(id);
+}
+function showCharts(id) {
+  //set place holders
+  d3.json("data/samples.json").then(function (data) {
+    var filterData = data.samples.filter((d) => d.id == id)[0];
+    console.log(filterData);
+    var names = [];
+    var metadata = [];
+    var samples = [];
+    // Create a horizontal bar chart with a dropdown menu to display top 10 OTUS found in individual
+    // 1. Use sample_values as the values for the bar chart
+    var sampleValues = filterData["sample_values"];
+    // 2. Use otu_ids as the labels for the bar chart
+    var otu_ids = filterData["otu_ids"];
+    // 3. Use otu_labels as the hovertext for the chart
+    var otu_labels = filterData["otu_labels"];
 
-//set place holders
-var names = [];
-var metadata = [];
-var samples = [];
-// Create a horizontal bar chart with a dropdown menu to display top 10 OTUS found in individual
-// 1. Use sample_values as the values for the bar chart
-// 2. Use otu_ids as the labels for the bar chart
-// 3. Use otu_labels as the hovertext for the chart
+    console.log(sampleValues);
+    var chartData = [
+      {
+        x: sampleValues.slice(0, 10).reverse(),
+        y: otu_ids
+          .slice(0, 10)
+          .map((otu) => "OTU " + otu)
+          .reverse(),
+        text: otu_labels.slice(0, 10).reverse(),
+        type: "bar",
+        orientation: "h",
+      },
+    ];
+    var layout = {
+      title: "top 10 Bacteria Cultures Found",
+    };
+    Plotly.newPlot("bar", chartData, layout);
+    //Create a bubble chart that displays each sample.
+    // 1. Use `otu_ids` for the x values.
+    // 2. Use `sample_values` for the y values.
+    // 3. Use `sample_values` for the marker size.
+    // 4. Use `otu_ids` for the marker colors.
+    // 5. Use `otu_labels` for the text values.
 
-//Create a bubble chart that displays each sample.
-// 1. Use `otu_ids` for the x values.
-// 2. Use `sample_values` for the y values.
-// 3. Use `sample_values` for the marker size.
-// 4. Use `otu_ids` for the marker colors.
-// 5. Use `otu_labels` for the text values.
+    chartData = [
+      {
+        x: otu_ids,
+        y: sampleValues,
+        text: otu_labels,
+        marker: {
+          size: sampleValues,
+          color: otu_ids,
+        },
+        mode: "markers",
+      },
+    ];
+    layout = {
+      title: "Bacteria Cultures per Sample",
+    };
+    Plotly.newPlot("bubble", chartData, layout);
+    // Display the sample metadata, i.e., an individual's demographic information.
+    var metaData = data.metadata.filter((d) => d.id == id)[0];
+    var metaDataPanel = d3.select("#sample-metadata");
 
-// Display the sample metadata, i.e., an individual's demographic information.
+    // Display each key-value pair from the metadata JSON object somewhere on the page.
+    metaDataPanel.html("");
+    Object.entries(metaData).forEach(([label, value]) => {
+      metaDataPanel.append("h5").text(label + ": " + value);
+    });
 
-// Display each key-value pair from the metadata JSON object somewhere on the page.
+    // Update all of the plots any time that a new sample is selected.
 
-// Update all of the plots any time that a new sample is selected.
+    //Create the layout for the dashboard
 
-//Create the layout for the dashboard
+    // Deployment:
+    // Deploy your app to a free static page hosting service, such as GitHub Pages.
 
-// Deployment:
-// Deploy your app to a free static page hosting service, such as GitHub Pages.
-
-//Advanced Challenge (Optional)
-// Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/>
-// to plot the weekly washing frequency of the individual.
-// You will need to modify the example gauge code to account for values ranging from 0 through 9.
-// Update the chart whenever a new sample is selected.
-// d3.json(data / samples).then(newSuccessFunc, errorFunc);
+    //Advanced Challenge (Optional)
+    // Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/>
+    // to plot the weekly washing frequency of the individual.
+    // You will need to modify the example gauge code to account for values ranging from 0 through 9.
+    // Update the chart whenever a new sample is selected.
+  });
+}
