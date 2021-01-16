@@ -1,8 +1,8 @@
 // Read in the samples.json file
 //name the .json location
-var data = "/data/samples.json";
+var dataSource = "/data/samples.json";
 // call it
-d3.json(data).then(function (data) {
+d3.json("/data/samples.json").then(function (data) {
   console.log(data[0]);
 });
 
