@@ -89,5 +89,28 @@ function showCharts(id) {
     // to plot the weekly washing frequency of the individual.
     // You will need to modify the example gauge code to account for values ranging from 0 through 9.
     // Update the chart whenever a new sample is selected.
+    chartData = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: 270,
+        title: { text: "Belly Button Washing Frequency <br> Scrubs per Week" },
+        type: "indicator",
+        mode: "gauge+number",
+        steps: [
+          { range: [0, 1], color: "white" },
+          { range: [1, 2], color: "beige" },
+          { range: [2, 3], color: "yellow" },
+          { range: [3, 4], color: "lightgreen" },
+          { range: [4, 5], color: "green" },
+          { range: [5, 6], color: "darkgreen" },
+          { range: [6, 7], color: "orange" },
+          { range: [7, 8], color: "darkorange" },
+          { range: [8, 9], color: "red" },
+        ],
+      },
+    ];
+
+    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    Plotly.newPlot("gauge", chartData, layout);
   });
 }
