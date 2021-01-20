@@ -41,7 +41,7 @@ function showCharts(id) {
       },
     ];
     var layout = {
-      title: "top 10 Bacteria Cultures Found",
+      title: "Top 10 Bacteria Cultures Found",
     };
     Plotly.newPlot("bar", chartData, layout);
     //Create a bubble chart that displays each sample.
@@ -71,6 +71,10 @@ function showCharts(id) {
     // Display the sample metadata, i.e., an individual's demographic information.
     var metaData = data.metadata.filter((d) => d.id == id)[0];
     var metaDataPanel = d3.select("#sample-metadata");
+    //Advanced Challenge (Optional)
+    // Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/>
+    // to plot the weekly washing frequency of the individual.
+    // You will need to modify the example gauge code to account for values ranging from 0 through 9.
 
     chartData = [
       {
@@ -83,17 +87,17 @@ function showCharts(id) {
         mode: "gauge+number",
         delta: { reference: 9 },
         gauge: {
-          axis: { range: [null, 9] },
+          axis: { range: [null, 9], tick0: 0, dtick: 1 },
           steps: [
-            { range: [0, 1], color: "white" },
-            { range: [1, 2], color: "yellow" },
-            { range: [2, 3], color: "lightpink" },
-            { range: [3, 4], color: "lightblue" },
-            { range: [4, 5], color: "blue" },
-            { range: [5, 6], color: "orange" },
-            { range: [6, 7], color: "pink" },
-            { range: [7, 8], color: "purple" },
-            { range: [8, 9], color: "darkorange" },
+            { range: [0, 1], color: "rgb(215,48,39" },
+            { range: [1, 2], color: "rgb(244,109,67" },
+            { range: [2, 3], color: "rgb(253,174,97" },
+            { range: [3, 4], color: "rgb(254,224,144)" },
+            { range: [4, 5], color: "rgb(224,243,248)" },
+            { range: [5, 6], color: "rgb(171,217,233)" },
+            { range: [6, 7], color: "rgb(116,173,209)" },
+            { range: [7, 8], color: "rgb(100,150,175)" },
+            { range: [8, 9], color: "rgb(69,117,180)" },
           ],
         },
       },
@@ -103,22 +107,10 @@ function showCharts(id) {
     Plotly.newPlot("gauge", chartData, layout);
 
     // Display each key-value pair from the metadata JSON object somewhere on the page.
+    // Update the chart whenever a new sample is selected.
     metaDataPanel.html("");
     Object.entries(metaData).forEach(([label, value]) => {
       metaDataPanel.append("h5").text(label + ": " + value);
     });
-
-    // Update all of the plots any time that a new sample is selected.
-
-    //Create the layout for the dashboard
-
-    // Deployment:
-    // Deploy your app to a free static page hosting service, such as GitHub Pages.
-
-    //Advanced Challenge (Optional)
-    // Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/>
-    // to plot the weekly washing frequency of the individual.
-    // You will need to modify the example gauge code to account for values ranging from 0 through 9.
-    // Update the chart whenever a new sample is selected.
   });
 }
