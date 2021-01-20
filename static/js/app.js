@@ -59,6 +59,7 @@ function showCharts(id) {
         marker: {
           size: sampleValues,
           color: otu_ids,
+          colorscale: "Bluered",
         },
         mode: "markers",
       },
@@ -76,7 +77,7 @@ function showCharts(id) {
         domain: { x: [0, 1], y: [0, 1] },
         value: metaData.wfreq,
         title: {
-          text: "Belly Button Washing Frequency <br> Scrubs per Week",
+          text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
         },
         type: "indicator",
         mode: "gauge+number",
