@@ -89,10 +89,10 @@ function showCharts(id) {
         gauge: {
           axis: { range: [null, 9], tick0: 0, dtick: 1 },
           steps: [
-            { range: [0, 1], color: "rgb(215,48,39" },
-            { range: [1, 2], color: "rgb(244,109,67" },
-            { range: [2, 3], color: "rgb(253,174,97" },
-            { range: [3, 4], color: "rgb(254,224,144)" },
+            { range: [0, 1], color: "rgb(255,0,255" },
+            { range: [1, 2], color: "rgb(255,179,255" },
+            { range: [2, 3], color: "rgb(255,230,255" },
+            { range: [3, 4], color: "rgb(255,255,255)" },
             { range: [4, 5], color: "rgb(224,243,248)" },
             { range: [5, 6], color: "rgb(171,217,233)" },
             { range: [6, 7], color: "rgb(116,173,209)" },
