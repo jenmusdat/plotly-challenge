@@ -8,6 +8,19 @@ This is an exmaple of what you will see when you look at the webpage.
 You can get to the webpage by clicking on this link:
 https://jenmusdat.github.io/plotly-challenge/
 
+# Process:
+
+To create this dashboard I did the following:
+
+1. Read in the .json file
+1. Created the dropdown menu
+1. Created a function to filter out selctions from the dropdown menu
+1. Created a bar graph
+1. Created a bubble graph
+1. Created a gauge graph
+1. Made it so that the data would reset everytime you updated the code
+1. I finished by working on styling
+
 ## Submitted by
 
 ## Jenny Kaylor
