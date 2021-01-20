@@ -6,6 +6,7 @@ This is an exmaple of what you will see when you look at the webpage.
 ![Top](Images/TopHalf.JPG)
 ![Bottom](Images/BottomHalf.JPG)
 You can get to the webpage by clicking on this link:
+https://jenmusdat.github.io/plotly-challenge/
 
 ## Submitted by
 
